@@ -1,6 +1,7 @@
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "WaietMenu"
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false 
 
 local function isMobile()
     return game:GetService("UserInputService").TouchEnabled
@@ -15,18 +16,19 @@ end
 local function getMenuSize()
     local isPhone = isMobile() and not isTablet()
     if isPhone then
-        return UDim2.new(0, 280, 0, 50)
+        return UDim2.new(0, 230, 0, 45)  
     elseif isTablet() then
-        return UDim2.new(0, 320, 0, 50)
+        return UDim2.new(0, 250, 0, 45)  
     else
-        return UDim2.new(0, 350, 0, 50)
+        return UDim2.new(0, 260, 0, 45)  
     end
 end
 
+-- Vị trí sát bên trái
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = getMenuSize()
-MainFrame.Position = UDim2.new(0.5, -140, 0.4, 0) 
+MainFrame.Position = UDim2.new(0, 10, 0.4, 0)  -- Sát trái: X = 10
 MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 MainFrame.BorderSizePixel = 1
 MainFrame.BorderColor3 = Color3.fromRGB(40, 40, 40)
@@ -40,27 +42,27 @@ DragButton.Text = ""
 DragButton.AutoButtonColor = false
 DragButton.BorderSizePixel = 1
 DragButton.BorderColor3 = Color3.fromRGB(50, 50, 50)
-DragButton.ZIndex = 1 
+DragButton.ZIndex = 1
 DragButton.Parent = MainFrame
 
 local LeftSide = Instance.new("Frame")
 LeftSide.Name = "LeftSide"
 LeftSide.Size = UDim2.new(0.7, 0, 1, 0)
 LeftSide.BackgroundTransparency = 1
-LeftSide.ZIndex = 2 -- Đặt cao hơn DragButton
+LeftSide.ZIndex = 2
 LeftSide.Parent = DragButton
 
 local Title = Instance.new("TextLabel")
 Title.Name = "Title"
-Title.Text = "ωαιت" 
-Title.Size = UDim2.new(1, -10, 1, 0)
-Title.Position = UDim2.new(0, 10, 0, 0)
+Title.Text = "ωαιت"
+Title.Size = UDim2.new(1, -5, 1, 0)  -- Padding nhỏ hơn
+Title.Position = UDim2.new(0, 8, 0, 0)  -- Sát hơn
 Title.BackgroundTransparency = 1
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 20 -- Tăng size tí cho rõ
+Title.TextSize = 18  -- Giảm size
 Title.Font = Enum.Font.GothamBold
 Title.TextXAlignment = Enum.TextXAlignment.Left
-Title.ZIndex = 3 
+Title.ZIndex = 3
 Title.Parent = LeftSide
 
 local RightSide = Instance.new("Frame")
@@ -76,7 +78,7 @@ Arrow.Text = "▼"
 Arrow.Size = UDim2.new(1, 0, 1, 0)
 Arrow.BackgroundTransparency = 1
 Arrow.TextColor3 = Color3.fromRGB(0, 170, 255)
-Arrow.TextSize = 20
+Arrow.TextSize = 18  -- Giảm size
 Arrow.Font = Enum.Font.GothamBold
 Arrow.TextXAlignment = Enum.TextXAlignment.Right
 Arrow.Parent = RightSide
@@ -94,8 +96,8 @@ MainContent.Visible = false
 local CategoryItem = Instance.new("TextButton")
 CategoryItem.Name = "CategoryItem"
 CategoryItem.Text = ""
-CategoryItem.Size = UDim2.new(1, -10, 0, 45)
-CategoryItem.Position = UDim2.new(0, 5, 0, 5)
+CategoryItem.Size = UDim2.new(1, -8, 0, 40)  -- Gọn hơn
+CategoryItem.Position = UDim2.new(0, 4, 0, 4)  -- Sát hơn
 CategoryItem.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 CategoryItem.AutoButtonColor = true
 CategoryItem.BorderSizePixel = 1
@@ -103,17 +105,17 @@ CategoryItem.BorderColor3 = Color3.fromRGB(50, 50, 50)
 
 local CategoryLeft = Instance.new("Frame")
 CategoryLeft.Name = "CategoryLeft"
-CategoryLeft.Size = UDim2.new(0.8, 0, 1, 0)
+CategoryLeft.Size = UDim2.new(0.75, 0, 1, 0)  -- Hẹp hơn
 CategoryLeft.BackgroundTransparency = 1
 CategoryLeft.Parent = CategoryItem
 
 local CategoryIcon = Instance.new("TextLabel")
 CategoryIcon.Name = "CategoryIcon"
 CategoryIcon.Text = "🎭"
-CategoryIcon.Size = UDim2.new(0, 30, 1, 0)
+CategoryIcon.Size = UDim2.new(0, 25, 1, 0)  
 CategoryIcon.BackgroundTransparency = 1
 CategoryIcon.TextColor3 = Color3.fromRGB(255, 255, 255)
-CategoryIcon.TextSize = 18
+CategoryIcon.TextSize = 16  
 CategoryIcon.Font = Enum.Font.Gotham
 CategoryIcon.TextXAlignment = Enum.TextXAlignment.Center
 CategoryIcon.Parent = CategoryLeft
@@ -121,19 +123,19 @@ CategoryIcon.Parent = CategoryLeft
 local CategoryText = Instance.new("TextLabel")
 CategoryText.Name = "CategoryText"
 CategoryText.Text = "Animation"
-CategoryText.Size = UDim2.new(1, -40, 1, 0)
-CategoryText.Position = UDim2.new(0, 40, 0, 0)
+CategoryText.Size = UDim2.new(1, -30, 1, 0)  
+CategoryText.Position = UDim2.new(0, 30, 0, 0)
 CategoryText.BackgroundTransparency = 1
 CategoryText.TextColor3 = Color3.fromRGB(255, 255, 255)
-CategoryText.TextSize = 16
+CategoryText.TextSize = 14  -- Nhỏ hơn
 CategoryText.Font = Enum.Font.Gotham
 CategoryText.TextXAlignment = Enum.TextXAlignment.Left
 CategoryText.Parent = CategoryLeft
 
 local CategoryRight = Instance.new("Frame")
 CategoryRight.Name = "CategoryRight"
-CategoryRight.Size = UDim2.new(0.2, 0, 1, 0)
-CategoryRight.Position = UDim2.new(0.8, 0, 0, 0)
+CategoryRight.Size = UDim2.new(0.25, 0, 1, 0)  
+CategoryRight.Position = UDim2.new(0.75, 0, 0, 0)
 CategoryRight.BackgroundTransparency = 1
 CategoryRight.Parent = CategoryItem
 
@@ -143,15 +145,15 @@ CategoryArrow.Text = ">"
 CategoryArrow.Size = UDim2.new(1, 0, 1, 0)
 CategoryArrow.BackgroundTransparency = 1
 CategoryArrow.TextColor3 = Color3.fromRGB(0, 170, 255)
-CategoryArrow.TextSize = 22
+CategoryArrow.TextSize = 18  -- Nhỏ hơn
 CategoryArrow.Font = Enum.Font.GothamBold
 CategoryArrow.TextXAlignment = Enum.TextXAlignment.Right
 CategoryArrow.Parent = CategoryRight
 
 local AnimationContent = Instance.new("Frame")
 AnimationContent.Name = "AnimationContent"
-AnimationContent.Size = UDim2.new(1, -10, 0, 0)
-AnimationContent.Position = UDim2.new(0, 5, 0, 55)
+AnimationContent.Size = UDim2.new(1, -8, 0, 0)  
+AnimationContent.Position = UDim2.new(0, 4, 0, 48) 
 AnimationContent.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 AnimationContent.BorderSizePixel = 1
 AnimationContent.BorderColor3 = Color3.fromRGB(50, 50, 50)
@@ -160,17 +162,17 @@ AnimationContent.Visible = false
 
 local AnimationList = Instance.new("ScrollingFrame")
 AnimationList.Name = "AnimationList"
-AnimationList.Size = UDim2.new(1, -10, 1, -10)
-AnimationList.Position = UDim2.new(0, 5, 0, 5)
+AnimationList.Size = UDim2.new(1, -8, 1, -8)  -- Hẹp hơn
+AnimationList.Position = UDim2.new(0, 4, 0, 4)
 AnimationList.BackgroundTransparency = 1
 AnimationList.BorderSizePixel = 0
-AnimationList.ScrollBarThickness = 4
+AnimationList.ScrollBarThickness = 3  -- Mỏng hơn
 AnimationList.ScrollBarImageColor3 = Color3.fromRGB(80, 80, 80)
 AnimationList.AutomaticCanvasSize = Enum.AutomaticSize.Y
 AnimationList.Parent = AnimationContent
 
 local UIListLayout = Instance.new("UIListLayout")
-UIListLayout.Padding = UDim.new(0, 6)
+UIListLayout.Padding = UDim.new(0, 5)  
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Parent = AnimationList
 
@@ -202,19 +204,19 @@ local ButtonNames = {
 for i = 1, 7 do
     local ItemButton = Instance.new("TextButton")
     ItemButton.Name = "Item"..i
-    ItemButton.Text = ButtonNames[i]  -- HIỆN TÊN TRỰC TIẾP
+    ItemButton.Text = ButtonNames[i]
     ItemButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     ItemButton.TextSize = 14
     ItemButton.Font = Enum.Font.Gotham
     ItemButton.TextXAlignment = Enum.TextXAlignment.Left
-    ItemButton.Size = UDim2.new(1, 0, 0, 38)
+    ItemButton.Size = UDim2.new(1, 0, 0, 32)  
     ItemButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     ItemButton.AutoButtonColor = true
     ItemButton.BorderSizePixel = 1
     ItemButton.BorderColor3 = Color3.fromRGB(60, 60, 60)
     
     local ItemPadding = Instance.new("UIPadding")
-    ItemPadding.PaddingLeft = UDim.new(0, 10)
+    ItemPadding.PaddingLeft = UDim.new(0, 8)  -- Ít padding hơn
     ItemPadding.Parent = ItemButton
     
     local ItemRight = Instance.new("Frame")
@@ -230,7 +232,7 @@ for i = 1, 7 do
     ItemIcon.Size = UDim2.new(1, 0, 1, 0)
     ItemIcon.BackgroundTransparency = 1
     ItemIcon.TextColor3 = Color3.fromRGB(0, 170, 255)
-    ItemIcon.TextSize = 16
+    ItemIcon.TextSize = 14 
     ItemIcon.Font = Enum.Font.GothamBold
     ItemIcon.TextXAlignment = Enum.TextXAlignment.Right
     ItemIcon.Parent = ItemRight
@@ -273,12 +275,12 @@ local function toggleMainDropdown()
         local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
         
         if categoryOpen then
-            local totalHeight = #AnimationList:GetChildren() * 44
-            local targetHeight = 55 + math.min(totalHeight, 300) + 10
+            local totalHeight = #AnimationList:GetChildren() * 37
+            local targetHeight = 48 + math.min(totalHeight, 250) + 8
             local tween1 = tweenService:Create(MainContent, tweenInfo, {Size = UDim2.new(1, 0, 0, targetHeight)})
             tween1:Play()
         else
-            local tween1 = tweenService:Create(MainContent, tweenInfo, {Size = UDim2.new(1, 0, 0, 55)})
+            local tween1 = tweenService:Create(MainContent, tweenInfo, {Size = UDim2.new(1, 0, 0, 48)})
             tween1:Play()
         end
     else
@@ -307,13 +309,13 @@ local function toggleCategory()
         local tweenService = game:GetService("TweenService")
         local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
         
-        local totalHeight = #AnimationList:GetChildren() * 44
-        local tween1 = tweenService:Create(AnimationContent, tweenInfo, {Size = UDim2.new(1, -10, 0, math.min(totalHeight, 300))})
+        local totalHeight = #AnimationList:GetChildren() * 37
+        local tween1 = tweenService:Create(AnimationContent, tweenInfo, {Size = UDim2.new(1, -8, 0, math.min(totalHeight, 250))})
         tween1:Play()
         
         if mainOpen then
             wait(0.1)
-            local newHeight = 55 + math.min(totalHeight, 300) + 10
+            local newHeight = 48 + math.min(totalHeight, 250) + 8
             local tween2 = tweenService:Create(MainContent, tweenInfo, {Size = UDim2.new(1, 0, 0, newHeight)})
             tween2:Play()
         end
@@ -322,7 +324,7 @@ local function toggleCategory()
         
         local tweenService = game:GetService("TweenService")
         local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-        local tween = tweenService:Create(AnimationContent, tweenInfo, {Size = UDim2.new(1, -10, 0, 0)})
+        local tween = tweenService:Create(AnimationContent, tweenInfo, {Size = UDim2.new(1, -8, 0, 0)})
         
         tween.Completed:Connect(function()
             if not categoryOpen then
@@ -333,7 +335,7 @@ local function toggleCategory()
         
         if mainOpen then
             wait(0.1)
-            local tween2 = tweenService:Create(MainContent, tweenInfo, {Size = UDim2.new(1, 0, 0, 55)})
+            local tween2 = tweenService:Create(MainContent, tweenInfo, {Size = UDim2.new(1, 0, 0, 48)})
             tween2:Play()
         end
     end
@@ -369,7 +371,6 @@ local function updateDrag(input)
     local newX = frameStart.X + delta.X
     local newY = frameStart.Y + delta.Y
     
-    -- Giới hạn trong màn hình
     local viewport = workspace.CurrentCamera.ViewportSize
     newX = math.clamp(newX, 0, viewport.X - MainFrame.AbsoluteSize.X)
     newY = math.clamp(newY, 0, viewport.Y - MainFrame.AbsoluteSize.Y)
@@ -394,7 +395,6 @@ DragButton.InputChanged:Connect(function(input)
     end
 end)
 
--- Kết thúc kéo
 game:GetService("UserInputService").InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         if dragging then
